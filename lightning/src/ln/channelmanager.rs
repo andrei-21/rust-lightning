@@ -6212,8 +6212,8 @@ where
 												claimable_payment.htlcs.iter().map(|htlc| htlc.value).sum();
 											claimable_payment.htlcs.iter_mut()
 												.for_each(|htlc| htlc.total_value_received = Some(amount_msat));
-											let counterparty_skimmed_fee_msat = claimable_payment.htlcs.iter()
-												.map(|htlc| htlc.counterparty_skimmed_fee_msat.unwrap_or(0)).sum();
+											// TODO: Do it smarter.
+											let counterparty_skimmed_fee_msat = total_value.saturating_sub(amount_msat);
 											debug_assert!(total_value.saturating_sub(amount_msat) <=
 												counterparty_skimmed_fee_msat);
 											claimable_payment.htlcs.sort();

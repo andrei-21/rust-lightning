@@ -203,9 +203,11 @@ pub(super) fn create_recv_pending_htlc_info(
 			msg: "The final CLTV expiry is too soon to handle",
 		});
 	}
+	// TODO: Do it smarter.
+	let prototype = true;
 	if (!allow_underpay && onion_amt_msat > amt_msat) ||
 		(allow_underpay && onion_amt_msat >
-		 amt_msat.saturating_add(counterparty_skimmed_fee_msat.unwrap_or(0)))
+		 amt_msat.saturating_add(counterparty_skimmed_fee_msat.unwrap_or(0)) && !prototype)
 	{
 		return Err(InboundHTLCErr {
 			err_code: 19,

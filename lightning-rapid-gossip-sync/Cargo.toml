@@ -23,7 +23,13 @@ bitcoin-io = { version = "0.1.2", default-features = false }
 criterion = { version = "0.4", optional = true, default-features = false }
 
 [dev-dependencies]
+anyhow = "1.0.98"
+chrono = "0.4.41"
 lightning = { version = "0.2.0", path = "../lightning", features = ["_test_utils"] }
 
 [lints]
 workspace = true
+
+[[example]]
+name = "read_snapshot"
+path = "examples/read_snapshot.rs"
